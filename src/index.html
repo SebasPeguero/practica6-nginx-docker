@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Práctica 6: Nginx con Docker Compose</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    :root {
+      --bg-color: #0b0f19;
+      --card-bg: rgba(17, 24, 39, 0.75);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --nginx-green: #009639;
+      --docker-blue: #0ea5e9;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-color);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(0, 150, 57, 0.15) 0px, transparent 50%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+    .card {
+      width: 100%;
+      max-width: 580px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(0, 150, 57, 0.15);
+      border: 1px solid rgba(0, 150, 57, 0.35);
+      color: #34d399;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: #34d399;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #34d399;
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #ffffff 40%, var(--docker-blue) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+    .info-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1rem 1.25rem;
+    }
+    .info-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+    .info-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    .tech-stack {
+      border-top: 1px solid var(--border-color);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-around;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .tech-item strong {
+      color: var(--text-main);
+      display: block;
+      margin-top: 0.2rem;
+    }
+    footer {
+      margin-top: 1.75rem;
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="badge">
+      <span class="dot"></span>
+      Contenedor Nginx en Ejecución
+    </div>
+    <h1>¡Hola Mundo! 🚀</h1>
+    <p class="subtitle">Servidor web Nginx ejecutado localmente con <strong>Docker Compose</strong></p>
+
+    <div class="info-grid">
+      <div class="info-box">
+        <div class="info-label">Estudiante</div>
+        <div class="info-value">Sebastián Peguero</div>
+      </div>
+      <div class="info-box">
+        <div class="info-label">Matrícula</div>
+        <div class="info-value">2025-1172</div>
+      </div>
+      <div class="info-box">
+        <div class="info-label">Materia</div>
+        <div class="info-value">Electiva II</div>
+      </div>
+      <div class="info-box">
+        <div class="info-label">Práctica</div>
+        <div class="info-value">Práctica 6: Nginx Docker</div>
+      </div>
+    </div>
+
+    <div class="tech-stack">
+      <div class="tech-item">
+        Servidor Web
+        <strong>Nginx (Alpine)</strong>
+      </div>
+      <div class="tech-item">
+        Orquestador
+        <strong>Docker Compose</strong>
+      </div>
+      <div class="tech-item">
+        Volumen Mapeado
+        <strong>./src &rarr; /usr/share/nginx/html</strong>
+      </div>
+    </div>
+
+    <footer>
+      Página montada dinámicamente mediante volúmenes de Docker
+    </footer>
+  </main>
+</body>
+</html>
